@@ -1,0 +1,34 @@
+python train_with_all_work.py \
+  --dataset_name 'china_with_normal_ten' \
+  --delim tab \
+  --d_type 'local' \
+  --pred_len 8 \
+  --encoder_h_dim_g 32 \
+  --encoder_h_dim_d 64\
+  --decoder_h_dim 32 \
+  --embedding_dim 16 \
+  --bottleneck_dim 32 \
+  --mlp_dim 64 \
+  --num_layers 1 \
+  --noise_dim 8 \
+  --noise_type gaussian \
+  --noise_mix_type global \
+  --pool_every_timestep 0 \
+  --l2_loss_weight 1 \
+  --batch_norm 0 \
+  --dropout 0 \
+  --batch_size 64 \
+  --g_learning_rate 1e-3 \
+  --g_steps 1 \
+  --d_learning_rate 1e-3 \
+  --d_steps 1 \
+  --checkpoint_every 10 \
+  --print_every 50 \
+  --num_iterations 10000 \
+  --num_epochs 700 \
+  --pooling_type 'pool_net' \
+  --clipping_threshold_g 1.5 \
+  --best_k 5 \
+  --gpu_num 0 \
+  --checkpoint_name china_with_normal_ten_tgan_1 \
+  --restore_from_checkpoint 0
