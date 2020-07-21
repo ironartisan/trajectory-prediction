@@ -31,7 +31,7 @@ logging.basicConfig(level=logging.INFO, format=FORMAT, stream=sys.stdout)
 logger = logging.getLogger(__name__)
 
 # Dataset options
-parser.add_argument('--dataset_name', default='asia_smooth', type=str)
+parser.add_argument('--dataset_name', default='asia4_smooth', type=str)
 parser.add_argument('--delim', default='tab')
 parser.add_argument('--loader_num_workers', default=4, type=int)
 parser.add_argument('--obs_len', default=8, type=int)
@@ -41,7 +41,7 @@ parser.add_argument('--skip', default=1, type=int)
 # Optimization
 parser.add_argument('--batch_size', default=64, type=int)
 parser.add_argument('--num_iterations', default=10000, type=int)
-parser.add_argument('--num_epochs', default=200, type=int)
+parser.add_argument('--num_epochs', default=2, type=int)
 
 # Model Options
 parser.add_argument('--embedding_dim', default=64, type=int)

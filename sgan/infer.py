@@ -4,14 +4,14 @@ import torch
 
 from attrdict import AttrDict
 
-from sgan.data.loader import data_loader
+from loader import data_loader
 from models import TrajectoryGenerator
-from utils import relative_to_abs, get_dset_path
+from utils.utils import relative_to_abs, get_dset_path
 
 from train_with_all_work import cal_ade, cal_fde
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path', default='models/sgan-models', type=str)
+parser.add_argument('--model_path', default='models', type=str)
 parser.add_argument('--num_samples', default=20, type=int)
 parser.add_argument('--dset_type', default='test', type=str)
 parser.add_argument('--use_cuda', default=0, type=int)

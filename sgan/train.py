@@ -11,18 +11,18 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from sgan.data.loader import data_loader
+from loader import data_loader
 from losses import gan_g_loss, gan_d_loss, l2_loss
 from losses import displacement_error, final_displacement_error
 
 from models import TrajectoryGenerator, TrajectoryDiscriminator
-from utils import int_tuple, bool_flag, get_total_norm
-from utils import relative_to_abs, get_dset_path
+from utils.utils import int_tuple, bool_flag, get_total_norm
+from utils.utils import relative_to_abs, get_dset_path
 
 
 from tensorboardX import SummaryWriter
 writer = SummaryWriter('./run/exp3')
-os.environ['KMP_DUPLICATE_LIB_OK']='True'
+# os.environ['KMP_DUPLICATE_LIB_OK']='True'
 torch.backends.cudnn.benchmark = True
 
 parser = argparse.ArgumentParser()

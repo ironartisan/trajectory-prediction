@@ -6,22 +6,17 @@ import pdb
 import torch.nn as nn
 from attrdict import AttrDict
 from loader_linear import data_loader
-from losses_linear import l2_loss
-from losses_linear import displacement_error, final_displacement_error
-
+import torchsnooper
 from models_linear import LinearModel
-
 from utils.utils import relative_to_abs, get_dset_path
-
-
 from train_linear import cal_ade, cal_fde
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path', default='models/sgan-models', type=str)
+parser.add_argument('--model_path', default='models', type=str)
 parser.add_argument('--num_samples', default=20, type=int)
 parser.add_argument('--dset_type', default='test', type=str)
-parser.add_argument('--use_cuda', default=0, type=int)
+parser.add_argument('--use_cuda', default=1, type=int)
 
 
 class Infer(object):
@@ -42,7 +37,7 @@ class Infer(object):
                 (obs_traj, pred_traj_gt) = batch
 
                 # [8, 4, 2]
-                pred_traj_fake = self.lstm(obs_traj)
+                pred_traj_fake = self.linear(obs_traj)
 
                 obs_traj = obs_traj.cpu().numpy()
                 pred_traj_fake = pred_traj_fake.cpu().numpy()
@@ -78,6 +73,7 @@ class Infer(object):
 
         return pred_traj_fake, ade, fde
 
+    @torchsnooper.snoop()
     def check_accuracy(self, loader_type='test', limit=True):
         if loader_type == 'test':
             loader = self.test_loader
@@ -156,10 +152,13 @@ if __name__ == '__main__':
     print(path)
     infer = Infer(args)
     infer.load_model(path)
-    obs_traj, pred_traj_fake, pred_traj_gt = infer.infer()
-    print(obs_traj)
-    print(pred_traj_fake)
-    print(pred_traj_gt)
+    metrics = infer.check_accuracy('test', limit=True)
+    print('linear test ade is %f' % metrics['ade'])
+    print('linear test fde is %f' % metrics['fde'])
+    # obs_traj, pred_traj_fake, pred_traj_gt = infer.infer()
+    # print(obs_traj)
+    # print(pred_traj_fake)
+    # print(pred_traj_gt)
 
 
 

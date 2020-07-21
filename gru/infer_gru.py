@@ -4,7 +4,7 @@ import torch
 import pdb
 import traceback
 import torch.nn as nn
-import torchsnooper
+# import torchsnoop
 
 from attrdict import AttrDict
 
@@ -12,7 +12,7 @@ from loader_gru import data_loader
 from models_gru import GRUModel
 from utils.utils import relative_to_abs, get_dset_path
 
-from train_lstm import cal_ade, cal_fde
+from train_gru import cal_ade, cal_fde
 
 
 parser = argparse.ArgumentParser()
@@ -77,7 +77,7 @@ class Infer(object):
 
         return pred_traj_fake, ade, fde
 
-    @torchsnooper.snoop()
+    # @torchsnooper.snoop()
     def check_accuracy(self, loader_type='test', limit=True):
         if loader_type == 'test':
             loader = self.test_loader
